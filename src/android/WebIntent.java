@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.Html;
@@ -160,6 +161,10 @@ public class WebIntent extends CordovaPlugin {
             String errorMessage=e.getMessage();
             //return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION,errorMessage));
+            return false;
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"ActivityNotFoundException"));
             return false;
         }
     }
